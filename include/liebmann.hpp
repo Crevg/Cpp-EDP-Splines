@@ -25,13 +25,15 @@ namespace anpi
 
 template <typename T>
 void liebmann(const Matrix<T> &A,
-              Matrix<T> &L)
+              Matrix<T> &L, std::vector<T> b)
 {
   size_t m = A.rows();
   size_t n = A.cols();
   T Aiplus1j, Aiminus1j, Aijminus1, Aijplus1;
   L = anpi::Matrix<T>(m,n,0.0);
-  for (size_t i = 0; i < m; ++i){
+  
+  size_t k = 0;
+  for (size_t i = 0; i < m; ++i,++k){
     for (size_t j = 0; j < n; ++j){
       Aiplus1j = Aiminus1j = Aijminus1 = Aijplus1 = 0.0; 
       if (i != 0){
@@ -46,9 +48,18 @@ void liebmann(const Matrix<T> &A,
       if (j != n){
         Aijplus1 = A[i][j+1];
       }
-      L[i][j] = (Aiplus1j + Aiminus1j + Aijplus1 + Aijminus1)/4;
+      L[i][j] = (Aiplus1j + Aiminus1j + Aijplus1 + Aijminus1 - b[k] )/4;
     }
+  
   }
+
+    std::cout << "La matri LIebman" << std::endl;
+    for (size_t i = 0; i < L.rows(); ++i){
+        for (size_t j = 0;j < L.cols(); ++j){
+            std::cout << L(i,j) << "\t";
+        }
+        std::cout << std::endl;
+    }
 
 }
 } // namespace anpi
