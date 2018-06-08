@@ -15,7 +15,7 @@ namespace anpi
 {
 template <typename T>
 void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const std::vector<T> &tBot,
-                        const std::vector<T> &tLeft, const std::vector<T> &tRight, const std::vector<bool> &aislados, std::vector<T> &bs)
+                        const std::vector<T> &tLeft, const std::vector<T> &tRight, bool aislados[], std::vector<T> &bs)
 { 
     std::vector<T> topTemp, botTemp, leftTemp, rightTemp;
 
@@ -39,7 +39,7 @@ void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const
         for (size_t j = 0; j <(size_t) h; ++j, ++k)
         {
             A(k, k) = -4;
-            if (i == 0)
+            if (i == 0 && !aislados[2])
             {
                 b-=leftTemp[j];
             }
@@ -47,7 +47,7 @@ void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const
             {
                 A(k, k-v) = 1;
             }
-            if (i == bordeDer)
+            if (i == bordeDer && !aislados[3])
             {
                 b-= rightTemp[j];
             }
@@ -55,7 +55,7 @@ void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const
             {       
                 A(k, k+v) = 1;
             }
-            if (j == 0)
+            if (j == 0 && !aislados[0])
             {
                 b-= topTemp[i];
             }
@@ -63,7 +63,7 @@ void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const
             {
                 A(k, k-1) = 1;
             }
-            if (j == bordeInf)
+            if (j == bordeInf && !aislados[1])
             {
                 b-=botTemp[i];
             }
@@ -76,26 +76,8 @@ void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const
             b=0;
         } //for j
     }     //for i
-
-    /*std::cout << "La matri" << std::endl;
-    for (size_t i = 0; i < lenA; ++i){
-        for (size_t j = 0;j < lenA; ++j){
-            std::cout << A(i,j) << "\t";
-        }
-        std::cout << std::endl;
-    }
-
-    std::cout << "La solu b" << std::endl;
-    for (size_t i = 0; i < bs.size(); ++i){
-        std::cout << bs[i] << "\t";
-    }
-    std::cout << std::endl;*/
-
-    anpi::Matrix<T> L;
-    anpi::liebmann(A, L, bs);
-
-    
     
 } //end edp
+
 } // namespace anpi
 #endif

@@ -14,6 +14,8 @@
 #include <iostream>
 #include <algorithm>
 #include <omp.h>
+#include <iostream>
+#include <fstream>
 #include "Exception.hpp"
 #include "Matrix.hpp"
 #include "SolveLU.hpp"
@@ -29,15 +31,11 @@ template <typename T>
 void liebmann(const Matrix<T> &A,
               Matrix<T> &L, std::vector<T> b)
 {
-    unsigned t1, t2;
-
-    t1=clock();
-
   size_t m = A.rows();
   size_t n = A.cols();
   T Aiplus1j, Aiminus1j, Aijminus1, Aijplus1;
   L = anpi::Matrix<T>(m, n, 0.0);
-  anpi::Matrix<T> Atmp = A;
+  anpi::Matrix<T> Lprev = A;
   T eps = std::numeric_limits<T>::epsilon();
   T maxi = std::numeric_limits<T>::max();
   size_t iter = 0;
@@ -70,46 +68,13 @@ void liebmann(const Matrix<T> &A,
         L[i][j] = (Aiplus1j + Aiminus1j + Aijplus1 + Aijminus1 - b[k]) / 4;
       }
     }
-    if (abs(Atmp(2, 3) - L(2, 3)) <= eps)
+    if (abs(Lprev(2, 3) - L(2, 3)) <= eps)
     {
       break;
     }
-    Atmp = L;
-    /*
-    std::cout << "La matri Liebman" << std::endl;
-    for (size_t i = 0; i < L.rows(); ++i){
-        for (size_t j = 0;j < L.cols(); ++j){
-            std::cout << L(i,j) << "\t";
-        }
-        std::cout << std::endl;
-    }*/
+    Lprev = L;
     ++iter;
   }
-  /*std::cout << "Num: " << iter << std::endl;
-
-  std::cout << "La matri Liebman" << std::endl;
-  for (size_t i = 0; i < L.rows(); ++i)
-  {
-    for (size_t j = 0; j < L.cols(); ++j)
-    {
-      std::cout << L(i, j) << "\t";
-    }
-    std::cout << std::endl;
-  }
-*/
-  std::cout << "El LU:" << std::endl;
-  std::vector<T> x;
-  t2=clock();
-  double time = (double(t2-t1)/CLOCKS_PER_SEC);
-  std::cout << "Tiempo Jacobi: " << time << "\n" << std::endl;
-
-  //anpi::solveLU(L, x, b);
-  // for (int i = 0; i < x.size(); ++i){
-  //   std::cout << x[i] << "\t";
-  // }
-  // std::cout << "\n";
-
-
 }
 
 } // namespace anpi
