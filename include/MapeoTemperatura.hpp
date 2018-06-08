@@ -4,8 +4,8 @@
  *
  * This file is part of the numerical analysis lecture CE3102 at TEC
  *
- * @Author: 
- * @Date  : 03.03.2018
+ * @Author: Erick Cordero
+ * @Date  : 05.06.2018
  */
 
 #include <cmath>
@@ -13,6 +13,7 @@
 #include <functional>
 #include <iostream>
 #include <algorithm>
+#include <omp.h>
 
 #include "Exception.hpp"
 #include "Matrix.hpp"
@@ -23,6 +24,16 @@
 namespace anpi
 {
 
+/**
+   *Mapea los valores lineales y de interpolación cúbica
+   *
+   * @param[in] JOBZ = val; valores de entrada 
+   * @param[in] IPLO = 'U':  Triangular superior;
+   * @param[out]INFO es un int
+                = 0:  successful exit   
+                < 0:  if INFO = -i, el i-ésimo argumento tiene un valor no permitido
+                > 0:  if INFO = i, el algoritmo no converge
+   */
 template <typename T>
 void mapeo(const std::vector<T>& val, const size_t tamano, std::vector<T>& valores)
 {
