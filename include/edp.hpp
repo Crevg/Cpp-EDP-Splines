@@ -77,7 +77,7 @@ void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const
         } //for j
     }     //for i
 
-    std::cout << "La matri" << std::endl;
+    /*std::cout << "La matri" << std::endl;
     for (size_t i = 0; i < lenA; ++i){
         for (size_t j = 0;j < lenA; ++j){
             std::cout << A(i,j) << "\t";
@@ -89,7 +89,7 @@ void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const
     for (size_t i = 0; i < bs.size(); ++i){
         std::cout << bs[i] << "\t";
     }
-    std::cout << std::endl;
+    std::cout << std::endl;*/
 
     anpi::Matrix<T> L;
     anpi::liebmann(A, L, bs);
