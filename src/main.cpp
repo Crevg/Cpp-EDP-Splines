@@ -121,7 +121,6 @@ int main(int ac, char *av[])
   }
 
   /************LEE EL ARCHIVO**********************/
-  std::cout << fileName << std::endl;
   inFile.open("../" + fileName);
   if (!inFile)
   {
@@ -138,7 +137,6 @@ int main(int ac, char *av[])
       std::cerr << "Debe indicar un borde válido" << std::endl;
       return -1;
     }
-    std::cout << line << std::endl;
   }
   else
   {
@@ -154,7 +152,6 @@ int main(int ac, char *av[])
       notEOF = false;
       line = "EOF";
     }
-    std::cout << line << std::endl;
     try
     {
       value = std::stod(line);
@@ -281,7 +278,7 @@ int main(int ac, char *av[])
   anpi::Matrix<double> L;
   anpi::liebmann(edp, L, sol);
   anpi::solveLU(edp, x, sol);
-  
+
   /* guarda la matriz en un archivo */
   std::ofstream matrixFile;  
   matrixFile.open("../Matrix.txt");
