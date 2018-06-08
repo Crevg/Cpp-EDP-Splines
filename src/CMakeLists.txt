@@ -46,5 +46,5 @@ endif()
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/AnpiConfig.hpp.in ${CMAKE_SOURCE_DIR}/include/AnpiConfig.hpp)
 
 add_library(anpi STATIC ${SRCS} ${HEADERS})
-add_executable(proyecto3 main.cpp)
-target_link_libraries(proyecto3 anpi python2.7 boost_program_options)
+add_executable(placa main.cpp)
+target_link_libraries(placa anpi python2.7 boost_program_options)
