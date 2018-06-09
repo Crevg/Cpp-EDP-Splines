@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import Tkinter as tk
 import subprocess
-
+import os
 
 
 
@@ -74,24 +74,29 @@ class mainGUI(tk.Tk):
 		self.startButton=tk.Button(self,bg="#32467D",fg="#fff",
 			font=("Helvetica",30),text="EJECUTAR",
 			activebackground="#0096FF",activeforeground="#fff",
-			command=lambda: self.startButtonFunction(10))
+			command=lambda: self.startButtonFunction(20))
 		self.startButton.grid(pady=20)
 		
 
 	def startButtonFunction(self,sF):#sF:size factor
 		strLine=self.instruction.get()
 		strList=strLine.split(" ")
-		s =subprocess.call(["chmod", "+x", "scriptPython"])	
-		s =subprocess.call("./scriptPython")
+		subprocess.call(["chmod", "+x", "scriptPython"])	
+		subprocess.call("./scriptPython")
+		wd=os.getcwd()
+		os.chdir(wd+"/build")
 		strList[0]="./src/"+strList[0]
-		s = subprocess.check_output(strList)
-		print("s = " + s)
+		print(strList[0])
+		print(strList[1])
+		print(strList[2])
+		subprocess.call(strList)
+		os.chdir(wd)
 		
 
 		values=[]
 		f=open("Matrix.txt","r")
 
-		f2.open("flags.txt","r")
+		f2=open("flags.txt","r")
 		flags=f2.read().split("\t")
 
 		if (flags[0]=="True"):
