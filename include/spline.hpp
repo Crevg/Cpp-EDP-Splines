@@ -13,8 +13,17 @@
 namespace anpi
 {
 
+
+/**
+ * Calcula la interpolación cúbica
+ * 
+ * @param[in] v = Vector de entrada de temperaturas
+ * @param[out] x = Vector de resultado con las constantes de las 
+ *                  interpolaciones
+ * */
+
 template <typename T>
-void spline(const std::vector<T> &v, std::vector<T> &sol, std::vector<T> &x)
+void spline(const std::vector<T> &v, std::vector<T> &x)
 {
     int n = v.size();
     std::vector<T> a = v;

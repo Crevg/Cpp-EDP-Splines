@@ -13,6 +13,21 @@
 
 namespace anpi
 {
+
+
+/**
+   *Mapea los valores lineales y de interpolación cúbica
+   *
+   * @param[out] A = Matriz de salida con EDP
+   * @param[in] h = tamaño horizontal de la matriz
+   * @param[in] v = tamaño vertical de la matriz
+   * @param[in] Top = Masa térmica en la parte superior de la placa
+   * @param[in] Bot = Masa térmica en la parte inferior de la placa
+   * @param[in] Top = Masa térmica en la parte izquierda de la placa
+   * @param[in] Top = Masa térmica en la parte derecha de la placa
+   * @param[in] aislados = Lados aislados de la placa
+   * @param[out] valores = Suma de la tempreraturas 
+   */
 template <typename T>
 void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const std::vector<T> &tBot,
                         const std::vector<T> &tLeft, const std::vector<T> &tRight, bool aislados[], std::vector<T> &bs)
