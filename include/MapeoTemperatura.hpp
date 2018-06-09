@@ -54,7 +54,7 @@ void mapeo(const std::vector<T>& val, const size_t tamano, std::vector<T>& valor
     }
     else{
         std::vector <T> sol, x;
-        anpi::spline(val, sol, x);
+        anpi::spline(val, x);
         std::vector<T> va, vb, vc, vd;
         for (size_t i = 0; i < x.size(); i+=4){
             va.push_back(x[i]);
