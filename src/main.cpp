@@ -53,7 +53,7 @@ int main(int ac, char *av[])
   std::string fileName;
   double value;
   int hori, vert, grid;
-  hori = vert = 50;
+  hori = vert = 20;
   grid = 5;
   flow = false;
   visualize = true;
@@ -294,11 +294,19 @@ int main(int ac, char *av[])
   }
   matrixFile.close();
 
-  if (!visualize){
-    std::cout << "NO MOSTRAR GRAFICO" << std::endl;
+  matrixFile.open("../flags.txt");
+  if (visualize){
+    matrixFile << "True" << "\t";
+  }else{
+    matrixFile << "False" << "\t";
   }
-  else if (flow){
-    std::cout << "MOSTRAR FLUJO DE CALOR CON " << grid << " DE GRID" << std::endl;
+  if (flow){
+    matrixFile << "True" << "\t";
+  }else{
+    matrixFile << "False" << "\t";
   }
+  matrixFile << grid << "\t";
+  matrixFile << "\n";
+  matrixFile.close();
   return 0;
 }
