@@ -81,7 +81,8 @@ class mainGUI(tk.Tk):
 	def startButtonFunction(self,sF):#sF:size factor
 		strLine=self.instruction.get()
 		strList=strLine.split(" ")
-		subprocess("./scriptPython")
+		s =subprocess.call(["chmod", "+x", "scriptPython"])	
+		s =subprocess.call("./scriptPython")
 		strList[0]="./src/"+strList[0]
 		s = subprocess.check_output(strList)
 		print("s = " + s)
