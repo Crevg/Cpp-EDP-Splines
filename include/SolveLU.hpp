@@ -55,14 +55,18 @@ bool solveLU(const anpi::Matrix<T> &A,
                 break;
             }
         }
+    
     }
+ 
     anpi::unpackDoolittle(LU, L, U);
     std::vector<T> Pb = P * b;
     std::vector<T> y;
+
     if (abs(L[0][0]) < eps)
     {
         throw anpi::Exception("Can't divide by 0");
     }
+
     y.push_back(Pb[0] / L[0][0]);
     //Sustitución hacia adelante Ly = Pb y obtener y
     T sum;
@@ -79,7 +83,6 @@ bool solveLU(const anpi::Matrix<T> &A,
         }
         y.push_back((Pb[i] - sum) / L[i][i]);
     }
-
     //Sustitución hacia atras Ux = y
     if (abs(U[n - 1][n - 1]) < eps)
     {
@@ -89,6 +92,7 @@ bool solveLU(const anpi::Matrix<T> &A,
 
     x = std::vector<T>(n, 0);
     x[n - 1] = y[n - 1] / U[n - 1][n - 1];
+
     for (int i = n - 2; i >= 0; --i)
     {
         sum = 0;
@@ -102,7 +106,6 @@ bool solveLU(const anpi::Matrix<T> &A,
         }
         x[i] = (y[i] - sum) / U[i][i];
     }
-
     return true;
 }
 

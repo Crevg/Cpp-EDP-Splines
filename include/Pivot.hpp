@@ -25,18 +25,31 @@ namespace anpi
 
 
 //prints a matrix
+/**
+ * Imprime una matriz
+ * @param[in] M = Matriz de entrada para imprimir
+ * 
+ * */
 template <typename T>
 void printM(const Matrix<T> &M){
   int rows = M.rows();
   int cols = M.cols();
   for (int i = 0 ; i < rows; ++i){
     for (int j = 0; j < cols; ++j){
-      std::cout << M[i][j] << "\t\t";
+      std::cout << M[i][j] << "\t";
     }
     std::cout << std::endl;
   }
 }
 
+/**
+ * 
+ * Realiza el pivoteo para el cálculo de LU
+ * 
+ * @param[in] A = Matriz de entrada 
+ * @param[out] LU = Matriz de salida con LU
+ * @param[out] p = Vector de permutaciones 
+ * */
 template <typename T>
 void pivot(const Matrix<T> &A,
            Matrix<T> &LU,

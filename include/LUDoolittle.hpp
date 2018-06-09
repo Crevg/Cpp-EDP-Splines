@@ -31,6 +31,10 @@ namespace anpi
    * It separates a packed LU matrix into the lower triangular matrix
    * L and the upper triangular matrix U, such that the diagonal of L
    * is composed by 1's.
+   * 
+   * @param[in] LU = Matriz de entrada LU
+   * @param[out] L = Matriz de salida con L
+   * @param[out] U = MAtriz de salida U 
    */
 template <typename T>
 void unpackDoolittle(const Matrix<T> &LU,
