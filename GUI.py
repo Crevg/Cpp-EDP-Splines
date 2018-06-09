@@ -82,33 +82,39 @@ class mainGUI(tk.Tk):
 		strLine=self.instruction.get()
 		strList=strLine.split(" ")
 		subprocess("./scriptPython")
+		strList[0]="./src/"+strList[0]
 		s = subprocess.check_output(strList)
 		print("s = " + s)
 		
 
 		values=[]
 		f=open("Matrix.txt","r")
-		lines=f.readlines()
-		for line in lines:
-			instructLst=line.split("\t")
-			values.append(instructLst)
+
+		f2.open("flags.txt","r")
+		flags=f2.read().split("\t")
+
+		if (flags[0]=="True"):
+			lines=f.readlines()
+			for line in lines:
+				instructLst=line.split("\t")
+				values.append(instructLst)
 
 
-		ancho=len(values[0])
-		alto=len(values)
-		otherWindow=tk.Tk()
-		otherWindow.geometry("{0}x{1}".format(ancho*sF,alto*sF))
-		
+			ancho=len(values[0])
+			alto=len(values)
+			otherWindow=tk.Tk()
+			otherWindow.geometry("{0}x{1}".format(ancho*sF,alto*sF))
+			
 
-		canv=tk.Canvas(otherWindow,bg="#fff",height=ancho*sF,width=alto*sF)
-		for x1 in range(0,len(values)):
-			for x2 in range(0,len(values[0])-1):
-				coord=x2*sF,x1*sF,x2*sF+sF,x1*sF+sF
-				color=getColor(float(values[x1][x2]),getGreater(values))
-				canv.create_rectangle(coord,fill=color,outline=color)
-				
-		canv.pack()
-		otherWindow.mainloop()
+			canv=tk.Canvas(otherWindow,bg="#fff",height=ancho*sF,width=alto*sF)
+			for x1 in range(0,len(values)):
+				for x2 in range(0,len(values[0])-1):
+					coord=x2*sF,x1*sF,x2*sF+sF,x1*sF+sF
+					color=getColor(float(values[x1][x2]),getGreater(values))
+					canv.create_rectangle(coord,fill=color,outline=color)
+					
+			canv.pack()
+			otherWindow.mainloop()
 
 app=mainGUI()
 app.mainloop()
