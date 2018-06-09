@@ -1,0 +1,3 @@
+#! /bin/bash
+./src/placa -ibt -h10 -v10 -l10 -p perfil1.txt -q
+
