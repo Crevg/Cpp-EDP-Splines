@@ -1,0 +1,2 @@
+#! /bin/bash
+./src/placa -h18 -v14 -b253 -g -p perfil1.txt -q -f

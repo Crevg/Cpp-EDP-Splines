@@ -1,19 +1,21 @@
-Create a directory build:
+Open Python and run the project in the file location
 
-> mkdir build;
+> python GUI.py
 
-Go into that directory
+Then type in the textfield all the conditions 
 
-> cd build;
+Example:
 
-You can choose to build a release version with:
+> placa -ib -t30 -p perfil1.txt
 
-> cmake ../ -DCMAKE_BUILD_TYPE=Release
+The standard for the edges conditions is
 
-or a debug version with
+> [Val[0], Val[n]]
 
-> cmake ../ -DCMAKE_BUILD_TYPE=Debug
+Example:
 
-And build everything with
+> [25, 100]
 
-> make
+Where:
+
+> Val[0] = 25 and Val[n] = 100
