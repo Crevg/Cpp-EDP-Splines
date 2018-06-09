@@ -27,12 +27,9 @@ namespace anpi
 /**
    *Mapea los valores lineales y de interpolación cúbica
    *
-   * @param[in] JOBZ = val; valores de entrada 
-   * @param[in] IPLO = 'U':  Triangular superior;
-   * @param[out]INFO es un int
-                = 0:  successful exit   
-                < 0:  if INFO = -i, el i-ésimo argumento tiene un valor no permitido
-                > 0:  if INFO = i, el algoritmo no converge
+   * @param[in] val = val; valores de entrada 
+   * @param[in] tamano = tamaño del vector;
+   * @param[out] valores = valores de salida mapeados de acuerdo al tamaño
    */
 template <typename T>
 void mapeo(const std::vector<T>& val, const size_t tamano, std::vector<T>& valores)
