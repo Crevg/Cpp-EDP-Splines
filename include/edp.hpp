@@ -18,18 +18,18 @@ void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const
                         const std::vector<T> &tLeft, const std::vector<T> &tRight, bool aislados[], std::vector<T> &bs)
 { 
     std::vector<T> topTemp, botTemp, leftTemp, rightTemp;
-
     anpi::mapeo(tTop, v, topTemp);
     anpi::mapeo(tBot, v, botTemp);
     anpi::mapeo(tLeft, h, leftTemp);
     anpi::mapeo(tRight, h, rightTemp);
+
     size_t lenA = v* h;
     A = anpi::Matrix<T>(lenA, lenA, 0.0);
     std::string solu;
     int k = 0; // filas
     
     k = 0;
-    T b;
+    T b = 0;
     size_t bordeDer, bordeInf;
     bordeDer = v-1;
     bordeInf = h-1;
@@ -39,38 +39,46 @@ void formEDP(anpi::Matrix<T> &A, int h, int v, const std::vector<T> &tTop, const
         for (size_t j = 0; j <(size_t) h; ++j, ++k)
         {
             A(k, k) = -4;
-            if (i == 0 && !aislados[2])
-            {
-                b-=leftTemp[j];
+            if (i == 0)
+            {   
+                if (!aislados[2]){
+                    b-=leftTemp[j];
+                }
+                
             }
             else
-            {
+            {   
                 A(k, k-v) = 1;
             }
-            if (i == bordeDer && !aislados[3])
+            if (i == bordeDer)
             {
-                b-= rightTemp[j];
+                if (!aislados[3]){
+                    b-=rightTemp[j];
+                }
             }
             else
             {       
                 A(k, k+v) = 1;
             }
-            if (j == 0 && !aislados[0])
+            if (j == 0)
             {
-                b-= topTemp[i];
+                if (!aislados[0]){
+                    b-=topTemp[j];
+                }
             }
             else
             {
                 A(k, k-1) = 1;
             }
-            if (j == bordeInf && !aislados[1])
+            if (j == bordeInf)
             {
-                b-=botTemp[i];
+                if (!aislados[1]){
+                    b-=botTemp[j];
+                }
             }
             else
             {
-                A(k, k + 1) = 1;
-            
+                A(k, k + 1) = 1;            
             }
             bs.push_back(b);
             b=0;

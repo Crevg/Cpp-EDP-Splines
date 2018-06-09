@@ -18,6 +18,7 @@
 #include "liebmann.hpp"
 #include "SolveLU.hpp"
 
+
 namespace po = boost::program_options;
 std::string findEdge(std::string line)
 {
@@ -281,9 +282,15 @@ int main(int ac, char *av[])
 
   /* guarda la matriz en un archivo */
   std::ofstream matrixFile;  
+  int count = 0;
   matrixFile.open("../Matrix.txt");
   for (size_t i = 0; i < x.size(); ++i){
-     matrixFile << x[i] << "\n";
+    if (count == hori){
+      count = 0;
+      matrixFile << "\n";
+    }
+     matrixFile << x[i] << "\t";
+     count++;
   }
   matrixFile.close();
 
